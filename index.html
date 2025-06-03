@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Loge Achi - Flash Sale</title>
+  <title>Loge Achi</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- Header -->
   <header>
-    <img src="assets/images/logo.png" alt="Logo" />
-    <h1>লগে আছি.com</h1>
-    <p>তোমার বাজার আমার লগে</p>
-    <input id="smartSearch" placeholder="পণ্য খুঁজুন..." onkeyup="filterProducts()" />
+    <img src="assets/logo.png" alt="Logo" class="logo">
+    <h1>লগে আছি</h1>
+    <p class="slogan">ভরসার অনলাইন বাজার</p>
+    <input type="text" id="searchInput" placeholder="Search product..." />
   </header>
 
   <!-- Sliding Banner -->
@@ -31,18 +34,19 @@
     </div>
   </section>
 
-  <section class="category-btns">
-    <a class="category-btn" href="women.html">👗 Women</a>
-    <a class="category-btn" href="beauty.html" style="background:#ce93d8;">💄 Beauty</a>
-    <a class="category-btn" href="electronics.html" style="background:#90caf9;">🔌 Electronics</a>
-    <a class="category-btn" href="accessories.html" style="background:#a5d6a7;">👜 Accessories</a>
+  <!-- Category Buttons -->
+  <section class="categories">
+    <button class="cat-btn"><img src="assets/women.png"> Women</button>
+    <button class="cat-btn"><img src="assets/beauty.png"> Beauty</button>
+    <button class="cat-btn"><img src="assets/accessories.png"> Accessories</button>
+    <button class="cat-btn"><img src="assets/electronics.png"> Electronics</button>
   </section>
 
   <!-- Product Grid -->
   <section class="products" id="productList">
     <!-- Products will appear here -->
   </section>
-  
+
   <script src="main.js"></script>
 </body>
 </html>
