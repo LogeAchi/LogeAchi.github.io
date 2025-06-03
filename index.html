@@ -46,29 +46,7 @@
   <!-- Product Grid -->
   <section class="products" id="productList"></section>
   <script>
-    async function loadJSON(path) {
-      const res = await fetch(path);
-      return await res.json();
-    }
-	
-	async function loadProducts() {
-      const products = await loadJSON('data/products.json');
-      const container = document.getElementById('productContainer');
-      products.forEach(product => {
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" />
-          <h3>${product.name}</h3>
-          <p class="old-price">৳${product.oldPrice}</p>
-          <p>৳${product.newPrice}</p>
-          <a href="https://wa.me/${product.phone}?text=Hi, I want to order ${product.name}" target="_blank">Order Now</a>
-        `;
-        container.appendChild(card);
-      });
-	}
-
-    loadProducts();	
+    	
   <script src="main.js"></script>
 </body>
 </html>
