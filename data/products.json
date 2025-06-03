@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Demo Product 1",
+    "image": "assets/products/mouse.jpg",
+    "oldPrice": 1200,
+    "newPrice": 100,
+    "phone": "8801620301814"
+  },
+  {
+    "name": "Demo Product 2",
+    "image": "assets/products/keyboard.jpg",
+    "oldPrice": 1200,
+    "newPrice": 110,
+    "phone": "8801620301814"
+  },
+  {
+    "name": "Demo Product 3",
+    "image": "assets/products/rechargeble-fan.jpg",
+    "oldPrice": 1200,
+    "newPrice": 120,
+    "phone": "8801620301814"
+  }
+]

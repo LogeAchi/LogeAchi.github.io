@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Cooling Fan",
+    "image": "assets/flash-sale/phone.jpg",
+    "oldPrice": 1500,
+    "newPrice": 999,
+    "endTime": "2025-06-04T12:00:00"
+  },
+  {
+    "name": "LED Light",
+    "image": "assets/flash-sale/laptop.jpg",
+    "oldPrice": 800,
+    "newPrice": 550,
+    "endTime": "2025-06-04T12:05:00"
+  }
+]

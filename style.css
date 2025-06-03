@@ -1,0 +1,59 @@
+
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+  color: #333;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  background-color: #ff6f61;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Titles */
+h2 {
+  margin: 20px 0 10px;
+  color: #ff6f61;
+  text-align: center;
+  animation: fadeIn 1s ease-in;
+}
+
+/* Product Cards */
+.product-card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Flash Sale Countdown */
+.countdown {
+  font-weight: bold;
+  color: #d9534f;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Sunglasses",
+    "old_price": 700,
+    "new_price": 499,
+    "image": "assets/images/sunglasses.jpg"
+  },
+  {
+    "name": "Hand Watch",
+    "old_price": 1200,
+    "new_price": 899,
+    "image": "assets/images/watch.jpg"
+  }
+]

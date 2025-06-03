@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Face Cream",
+    "old_price": 400,
+    "new_price": 299,
+    "image": "assets/images/cream.jpg"
+  },
+  {
+    "name": "Lipstick",
+    "old_price": 250,
+    "new_price": 180,
+    "image": "assets/images/lipstick.jpg"
+  }
+]

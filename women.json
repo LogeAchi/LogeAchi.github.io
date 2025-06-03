@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Ladies Bag",
+    "old_price": 1200,
+    "new_price": 850,
+    "image": "assets/images/bag.jpg"
+  },
+  {
+    "name": "Stylish Kurti",
+    "old_price": 900,
+    "new_price": 650,
+    "image": "assets/images/kurti.jpg"
+  }
+]

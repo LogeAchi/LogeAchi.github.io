@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Accessories Category</title>
+  <style>
+    .product-card {
+      flex: 1 1 calc(50% - 20px);
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .product-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+    button {
+      background: #9C27B0;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<section style="padding: 40px; max-width: 1000px; margin: auto;">
+  <h2 style="text-align:center; font-size: 2em; color: #9C27B0;">Category: Accessories</h2>
+  <div id="product-container" class="product-grid"></div>
+</section>
+
+<script>
+  const phoneNumber = "8801XXXXXXXXX"; // তোমার WhatsApp নাম্বার এখানে বসাও
+
+  function orderNow(product) {
+    const message = encodeURIComponent("Hi, I want to order: " + product);
+    window.open("https://wa.me/" + phoneNumber + "?text=" + message, "_blank");
+  }
+
+  fetch("accessories.json")
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById("product-container");
+      data.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p><del>৳${product.old_price}</del> <strong>৳${product.new_price}</strong></p>
+          <button onclick="orderNow('${product.name}')">Order Now</button>
+        `;
+        container.appendChild(card);
+      });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Bluetooth Speaker",
+    "old_price": 1800,
+    "new_price": 1350,
+    "image": "assets/images/speaker.jpg"
+  },
+  {
+    "name": "Smart Watch",
+    "old_price": 2500,
+    "new_price": 1990,
+    "image": "assets/images/smartwatch.jpg"
+  }
+]
