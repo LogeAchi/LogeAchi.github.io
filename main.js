@@ -29,9 +29,9 @@ updateCountdown();
       });
   }
 const demoProducts = [
-  { name: "Mini Fan", img: "assets/products/keyboard.jpg" },
-  { name: "USB Light", img: "assets/products/mouse.jpg" },
-  { name: "Charger", img: "assets/products/rechargeble-fan.jpg" },
+  { name: "keyboard", img: "assets/products/keyboard.jpg" },
+  { name: "mouse", img: "assets/products/mouse.jpg" },
+  { name: "rechargeble-fan", img: "assets/products/rechargeble-fan.jpg" },
   { name: "Mobile ", img: "assets/products/mobile.jpg" },
 ];
 
