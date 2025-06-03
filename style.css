@@ -12,11 +12,11 @@ header {
 }
 
 .logo {
-  height: 30px;
+  height: 50px;
 }
 
 .slogan {
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
 }
 
@@ -37,7 +37,7 @@ header {
 
 .slider {
   display: flex;
-  animation: slide 5s infinite linear;
+  animation: slide 12s infinite linear;
 }
 
 .slide {
@@ -56,7 +56,7 @@ header {
   background: #fff0f0;
   padding: 10px;
   margin: 10px;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 #countdown {
