@@ -16,9 +16,9 @@ const flashSaleItems = document.getElementById("flashSaleItems");
 const productList = document.getElementById("productList");
 
 const demoProducts = [
-  { name: "Mini Fan", img: "assets/fan.jpg" },
-  { name: "USB Light", img: "assets/light.jpg" },
-  { name: "Mobile Charger", img: "assets/charger.jpg" },
+  { name: "Mini Fan", img: "assets/flash-sale/laptop.jpg" },
+  { name: "USB Light", img: "assets/flash-sale/phone.jpg" },
+  { name: "Mobile Charger", img: "assets/flash-sale/charger.jpg" },
 ];
 
 function loadProducts() {
