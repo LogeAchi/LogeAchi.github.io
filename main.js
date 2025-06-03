@@ -11,28 +11,15 @@ function updateCountdown() {
 }
 updateCountdown();
 
-}
+// Flash Sale Product Generator
+const flashSaleItems = document.getElementById("flashSaleItems");
+const productList = document.getElementById("productList");
 
-  // Load flash sale
-  const flashSaleEl = document.getElementById("flash-sale");
-  if (flashSaleEl) {
-    fetch("data/flash-sale.json")
-      .then(res => res.json())
-      .then(items => {
-        flashSaleEl.innerHTML = items.map(item => \`
-          <div class="product-card">
-            <h4>\${item.name}</h4>
-            <p>\${item.price}</p>
-            <div class="countdown" data-endtime="\${item.endTime}">Loading...</div>
-          </div>\`).join("");
-        initCountdowns();
-      });
-  }
 const demoProducts = [
   { name: "keyboard", img: "assets/products/keyboard.jpg" },
   { name: "mouse", img: "assets/products/mouse.jpg" },
   { name: "rechargeble-fan", img: "assets/products/rechargeble-fan.jpg" },
-  { name: "Mobile ", img: "assets/products/mobile.jpg" },
+  { name: "mobile", img: "assets/products/mobile.jpg" },
 ];
 
 function loadProducts() {
