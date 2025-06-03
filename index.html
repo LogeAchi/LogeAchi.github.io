@@ -1,40 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Loge Achi</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Loge Achi - Flash Sale</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f9fc;
+    }
+    header {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+    header img {
+      max-height: 80px;
+    }
+    #smartSearch {
+      width: 60%;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 10px;
+      border: none;
+      margin-top: 15px;
+    }
+    .carousel {
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 20px auto;
+      border-radius: 12px;
+    }
+    .carousel img {
+      width: 100%;
+      object-fit: cover;
+    }
+    .flash-sale-wrapper {
+      overflow: hidden;
+      max-width: 1000px;
+      margin: 20px auto;
+      position: relative;
+    }
+    .flash-sale-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .flash-card {
+      flex: 0 0 100%;
+      box-sizing: border-box;
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      background: white;
+    }
+    .flash-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .category-btns {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 30px auto;
+    }
+    .category-btn {
+      padding: 20px;
+      background: #f48fb1;
+      border-radius: 15px;
+      width: 180px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+    .category-btn:hover {
+      transform: scale(1.1);
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 10px;
+    }
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    }
+    .product-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .old-price {
+      color: red;
+      text-decoration: line-through;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <img src="assets/images/logo.png" alt="Logo" class="logo">
-    <h1>লগে আছি</h1>
-    <p class="slogan">ভরসার অনলাইন বাজার</p>
-    <input type="text" id="searchInput" placeholder="Search product..." />
+    <img src="assets/images/logo.png" alt="Logo" />
+    <h1>লগে আছি.com</h1>
+    <p>তোমার বাজার আমার লগে</p>
+    <input id="smartSearch" placeholder="পণ্য খুঁজুন..." onkeyup="filterProducts()" />
   </header>
 
-  <!-- Sliding Banner -->
-  <section class="banner">
-    <div class="slider">
-      <img src="assets/banners/charger.jpg" class="slide" />
-      <img src="assets/banners/fan.jpg" class="slide" />
-      <img src="assets/banners/speaker.jpg" class="slide" />
+  <section class="carousel" id="banner-container"></section>
+
+  <section>
+    <h2 style="text-align:center; color:#e91e63;">🔥 Flash Sale 🔥</h2>
+    <div class="flash-sale-wrapper">
+      <div class="flash-sale-track" id="flashSaleContainer"></div>
     </div>
   </section>
 
-  <!-- Flash Sale -->
-  <section class="flash-sale">
-    <h2>🔥 Flash Sale</h2>
-    <div id="countdown"></div>
-    <div class="flash-items" id="flashSaleItems">
-      <!-- Products will slide here -->
-    </div>
-  </section>
-
-  <!-- Category Buttons -->
   <section class="category-btns">
     <a class="category-btn" href="women.html">👗 Women</a>
     <a class="category-btn" href="beauty.html" style="background:#ce93d8;">💄 Beauty</a>
@@ -42,11 +134,94 @@
     <a class="category-btn" href="accessories.html" style="background:#a5d6a7;">👜 Accessories</a>
   </section>
 
+  <section class="products" id="productContainer"></section>
 
-  <!-- Product Grid -->
-  <section class="products" id="productList"></section>
   <script>
-    	
-  <script src="main.js"></script>
+    async function loadJSON(path) {
+      const res = await fetch(path);
+      return await res.json();
+    }
+
+    async function loadBanners() {
+      const banners = await loadJSON('data/banners.json');
+      const container = document.getElementById('banner-container');
+      banners.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        container.appendChild(img);
+      });
+    }
+
+    async function loadFlashSale() {
+      const products = await loadJSON('data/flash-sale.json');
+      const container = document.getElementById('flashSaleContainer');
+      products.forEach((product, index) => {
+        const card = document.createElement('div');
+        card.className = 'flash-card';
+        card.innerHTML = `
+          <img src="${product.image}" />
+          <h3>${product.name}</h3>
+          <p><del>৳${product.oldPrice}</del> <strong>৳${product.newPrice}</strong></p>
+          <p id="timer${index}"></p>
+          <button onclick="orderNow('${product.name}')">Order Now</button>
+        `;
+        container.appendChild(card);
+        startCountdown(product.endTime, document.getElementById(`timer${index}`));
+      });
+      setInterval(() => {
+        container.appendChild(container.firstElementChild);
+      }, 3000);
+    }
+
+    async function loadProducts() {
+      const products = await loadJSON('data/products.json');
+      const container = document.getElementById('productContainer');
+      products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" />
+          <h3>${product.name}</h3>
+          <p class="old-price">৳${product.oldPrice}</p>
+          <p>৳${product.newPrice}</p>
+          <a href="https://wa.me/${product.phone}?text=Hi, I want to order ${product.name}" target="_blank">Order Now</a>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function startCountdown(endTime, display) {
+      function update() {
+        const now = new Date().getTime();
+        const distance = new Date(endTime).getTime() - now;
+        if (distance <= 0) {
+          display.innerHTML = '<span style="color:red">Expired</span>';
+          return;
+        }
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        display.innerHTML = `⏳ ${minutes}m ${seconds}s`;
+        setTimeout(update, 1000);
+      }
+      update();
+    }
+
+    function orderNow(name) {
+      const msg = encodeURIComponent(`Hi, I want to order: ${name}`);
+      window.open(`https://wa.me/8801620301814?text=${msg}`, '_blank');
+    }
+
+    function filterProducts() {
+      const filter = document.getElementById('smartSearch').value.toUpperCase();
+      document.querySelectorAll('.product-card').forEach(card => {
+        const text = card.innerText.toUpperCase();
+        card.style.display = text.includes(filter) ? '' : 'none';
+      });
+    }
+
+    loadBanners();
+    loadFlashSale();
+    loadProducts();
+  </script>
 </body>
 </html>
