@@ -1,65 +1,52 @@
+// Flash Sale Countdown Timer
+const countdown = document.getElementById("countdown");
+let time = 3600; // 1 hour
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Load banners
-  const bannerEl = document.getElementById("banner");
-  if (bannerEl) {
-    fetch("data/banners.json")
-      .then(res => res.json())
-      .then(banners => {
-        bannerEl.innerHTML = banners.map(b => \`
-          <div class="banner-slide" style="background: #fff3e0; padding: 10px; margin: 5px; border-radius: 10px;">
-            <h3>\${b.title}</h3><p>\${b.subtitle}</p>
-          </div>\`).join("");
-      });
-  }
+function updateCountdown() {
+  const mins = Math.floor(time / 60);
+  const secs = time % 60;
+  countdown.innerText = `⏳ ${mins}m ${secs}s left`;
+  time--;
+  if (time >= 0) setTimeout(updateCountdown, 1000);
+}
+updateCountdown();
 
-  // Load flash sale
-  const flashSaleEl = document.getElementById("flash-sale");
-  if (flashSaleEl) {
-    fetch("data/flash-sale.json")
-      .then(res => res.json())
-      .then(items => {
-        flashSaleEl.innerHTML = items.map(item => \`
-          <div class="product-card">
-            <h4>\${item.name}</h4>
-            <p>\${item.price}</p>
-            <div class="countdown" data-endtime="\${item.endTime}">Loading...</div>
-          </div>\`).join("");
-        initCountdowns();
-      });
-  }
+// Flash Sale Product Generator
+const flashSaleItems = document.getElementById("flashSaleItems");
+const productList = document.getElementById("productList");
 
-  // Load products if JSON name matches filename
-  const filename = location.pathname.split("/").pop().replace(".html", "");
-  const contentEl = document.getElementById("product-list");
-  if (contentEl && filename) {
-    fetch(\`\${filename}.json\`)
-      .then(res => res.json())
-      .then(products => {
-        contentEl.innerHTML = products.map(p => \`
-          <div class="product-card">
-            <h4>\${p.name}</h4><p>\${p.price}</p>
-          </div>\`).join("");
-      });
-  }
-});
+const demoProducts = [
+  { name: "Mini Fan", img: "assets/fan.jpg" },
+  { name: "USB Light", img: "assets/light.jpg" },
+  { name: "Mobile Charger", img: "assets/charger.jpg" },
+];
 
-function initCountdowns() {
-  const countdownEls = document.querySelectorAll(".countdown");
-  countdownEls.forEach(el => {
-    const end = new Date(el.dataset.endtime).getTime();
-    const interval = setInterval(() => {
-      const now = Date.now();
-      const diff = end - now;
-      if (diff <= 0) {
-        el.textContent = "Expired";
-        clearInterval(interval);
-        return;
-      }
-      const hrs = Math.floor(diff / (1000 * 60 * 60));
-      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const secs = Math.floor((diff % (1000 * 60)) / 1000);
-      el.textContent = \`\${hrs}h \${mins}m \${secs}s\`;
-    }, 1000);
+function loadProducts() {
+  demoProducts.forEach(p => {
+    const html = `
+      <div class="product">
+        <img src="${p.img}" alt="${p.name}">
+        <p>${p.name}</p>
+        <button class="order-btn" onclick="orderNow('${p.name}')">Order Now</button>
+      </div>`;
+    flashSaleItems.innerHTML += html;
+    productList.innerHTML += html;
   });
 }
+loadProducts();
+
+// Order Now Button via WhatsApp
+function orderNow(name) {
+  const link = `https://wa.me/8801620301814?text=Hi! I want to order: ${name}`;
+  window.open(link, "_blank");
+}
+
+// Real-time Search
+document.getElementById("searchInput").addEventListener("input", function () {
+  const value = this.value.toLowerCase();
+  const products = document.querySelectorAll("#productList .product");
+  products.forEach(p => {
+    const name = p.innerText.toLowerCase();
+    p.style.display = name.includes(value) ? "block" : "none";
+  });
+});
